@@ -1,4 +1,3 @@
-
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
@@ -42,9 +41,9 @@ export const register=(req,res)=>{
 
 //login 
 export const login = (req, res) => {
-  const q = "SELECT * FROM users WHERE username = ?";
+  const q = "SELECT * FROM users WHERE email = ?";
 
-  db.query(q, [req.body.username], (err, data) => {
+  db.query(q, [req.body.email], (err, data) => {
     if (err) {
       return res.status(500).json({ message: "Database connection error" });
     }
@@ -56,6 +55,7 @@ export const login = (req, res) => {
 
       const user = data[0];
 
+      console.log("Password: ", data[0].password);
       
       const checkPassword=bcrypt.compareSync(req.body.password,data[0].password)
     
