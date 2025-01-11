@@ -8,6 +8,12 @@ import authRoutes from "./routes/auth.js";
 const app = express();
 
 // Middleware
+
+app.use((re, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true)
+
+  next();
+})
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());

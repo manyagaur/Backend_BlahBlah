@@ -7,6 +7,7 @@ router.post("/register",register)
 
 router.post("/login", login)
 
+router.post("/logout", login)
 
 export default router
 
