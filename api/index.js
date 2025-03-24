@@ -9,11 +9,13 @@ const app = express();
 
 // Middleware
 
-app.use((re, res, next) => {
-  res.header("Access-Control-Allow-Credentials", true)
-
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173"); // Allow frontend origin
+  res.header("Access-Control-Allow-Credentials", true); // Allow cookies
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE"); // Allow HTTP methods
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization"); // Allow necessary headers
   next();
-})
+});
 app.use(express.json());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(cookieParser());

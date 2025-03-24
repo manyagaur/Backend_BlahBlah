@@ -75,7 +75,9 @@ export const login = (req, res) => {
 
         res.cookie("accessToken", token, {
           httpOnly: true,
-        }).status(200).json({"accesToken":token,others, "password1":user.password, "password2":req.body.password, checkPassword:checkPassword});
+          secure: false,         
+          sameSite: "lax",       
+        }).status(200).json({"accesToken":token, others, "password1":user.password, "password2":req.body.password, checkPassword:checkPassword});
       });
    
 };
@@ -83,7 +85,7 @@ export const login = (req, res) => {
 export const logout = (req,res) => {
 
   res.clearCookie("accessToken", {
-    secure: true,
+    secure: false,
     sameSite: "none"
   }).status(200).json("User has been logged out.")
 }
