@@ -65,10 +65,7 @@ export const login = (req, res) => {
     }).status(200).json({ access_token: token, others });
   });
 };
-export const checkLogin=(req,res)=>{
-   console.log(req)
-  return 
-}
+
 // Logout 
 export const logout = (req, res) => {
   res.clearCookie("access_token", {
