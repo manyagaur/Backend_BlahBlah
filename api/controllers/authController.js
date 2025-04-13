@@ -1,4 +1,6 @@
 import { db } from "../connect.js";
+import dotenv from 'dotenv';
+dotenv.config();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
@@ -52,7 +54,7 @@ export const login = (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: user.id }, "secretKey", { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
     const { password, ...others } = user;
 
@@ -63,8 +65,11 @@ export const login = (req, res) => {
     }).status(200).json({ access_token: token, others });
   });
 };
-
-// Logout
+export const checkLogin=(req,res)=>{
+   console.log(req)
+  return 
+}
+// Logout 
 export const logout = (req, res) => {
   res.clearCookie("access_token", {
     httpOnly: true,
